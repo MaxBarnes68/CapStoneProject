@@ -1,1 +1,41 @@
-<p>dashboard works!</p>
+<form [formGroup]="searchDishForm" class="search-form" (submit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Enter Keyword to search</mat-label>
+        <input matInput formControlName="title">
+
+        <button mat-button matSuffix color="primary" [disabled]="searchDishForm.invalid">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>
+
+<div class="dish-list">
+    <mat-card class="dish-card" *ngFor="let dish of dishes">
+        <div class="dish-image">
+            <img [src]="dish.processedImg" alt="dish-image">
+        </div>
+        <div class="dish-details">
+            <h2 class="dish-name">{{ dish.name }}</h2>
+            <p class="dish-description">{{ dish.description }}</p>
+
+            <mat-divider></mat-divider>
+            <div class="dish-info">
+                <div class="info-row">
+                    <span class="info-label">Price:</span>
+                    <span class="info-value">£{{ dish.price }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Category:</span>
+                    <span class="info-value">{{ dish.categoryName }}</span>
+                </div>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="actions">
+                <button mat-raised-button color="primary" class="update-button" (click)="addToCart(dish.id)">
+                        Add to Cart
+                    </button>
+            </div>
+        </div>
+    </mat-card>
+</div>
