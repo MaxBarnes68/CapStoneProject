@@ -50,6 +50,8 @@ export class DashboardComponent {
     }
 
     addToCart(id:any){
-      
+      this.customerService.addToCart(id).subscribe(res => {
+        this.snackBar.open("Dish added to cart successfully", "Close", { duration: 5000 })
+      })
     }
 }

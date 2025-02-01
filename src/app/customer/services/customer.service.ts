@@ -24,6 +24,23 @@ export class CustomerService {
       });
     }
 
+    addToCart(dishId:any): Observable<any> {
+      const cartDto = {
+        dishId: dishId,
+        userId: UserStorageService.getUserId()
+      }
+      return this.http.post(BASIC_URL + 'api/customer/cart', cartDto, {
+        headers: this.createAuthorizationHeader(),
+      });
+    }
+
+    getCartByUserId(): Observable<any> {
+      const userId = UserStorageService.getUserId();
+      return this.http.get(BASIC_URL + `api/customer/cart/${userId}`, {
+        headers: this.createAuthorizationHeader(),
+      });
+    }
+
     private createAuthorizationHeader(): HttpHeaders {
         return new HttpHeaders().set(
           'Authorization', 'Bearer ' + UserStorageService.getToken()

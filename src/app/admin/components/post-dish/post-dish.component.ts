@@ -70,7 +70,8 @@ export class PostDishComponent {
           this.router.navigateByUrl('/admin/dashboard');
         }else{
           this.snackBar.open(res.message, 'ERROR', {
-            duration: 5000
+            duration: 5000,
+            panelClass: 'error-snackbar'
           });
         }
       })
