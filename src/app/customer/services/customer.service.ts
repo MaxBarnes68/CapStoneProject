@@ -23,7 +23,7 @@ export class CustomerService {
         headers: this.createAuthorizationHeader(),
       });
     }
-
+    
     addToCart(dishId:any): Observable<any> {
       const cartDto = {
         dishId: dishId,
@@ -37,6 +37,12 @@ export class CustomerService {
     getCartByUserId(): Observable<any> {
       const userId = UserStorageService.getUserId();
       return this.http.get(BASIC_URL + `api/customer/cart/${userId}`, {
+        headers: this.createAuthorizationHeader(),
+      });
+    }
+
+    placeOrder(orderDto: any): Observable<any> {
+      return this.http.post(BASIC_URL + 'api/customer/placeOrder', orderDto, {
         headers: this.createAuthorizationHeader(),
       });
     }
